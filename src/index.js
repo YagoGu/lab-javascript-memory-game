@@ -68,7 +68,7 @@ window.addEventListener('load', () => {
             document.querySelector('#memory-board').innerHTML = `
               <h1>GAME OVER</h1>
               <h2>Pairs clicked: ${memoryGame.pairsClicked}</h2>
-              <h2>Pairs clicked: ${memoryGame.pairsGuessed}</h2>
+              <h2>Pairs guessed: ${memoryGame.pairsGuessed}</h2>
             `
           }
         }

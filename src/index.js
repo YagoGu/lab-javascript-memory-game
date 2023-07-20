@@ -72,7 +72,9 @@ window.addEventListener('load', () => {
             `
           }
         }
-      }, 1000)
+        else if (memoryGame.pickedCards.length > 2) {
+        setTimeout( () => { if (card.className === "card turned") {card.className = "card"; memoryGame.pickedCards = [];} }, 1000)}
+      }, 1500)
     });
   });
 });

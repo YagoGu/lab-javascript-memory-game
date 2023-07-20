@@ -51,30 +51,26 @@ window.addEventListener('load', () => {
       console.log(`Card clicked: ${card}`);
       
       memoryGame.pickedCards.push(card)
-      setTimeout( () => { 
-        if (memoryGame.pickedCards.length == 2) {
-          if (memoryGame.checkIfPair(memoryGame.pickedCards[0].getAttribute("data-card-name"), memoryGame.pickedCards[1].getAttribute("data-card-name")) === true) {
-              memoryGame.pickedCards[0].className = "blocked"
-              memoryGame.pickedCards[1].className = "blocked"
-          }
-          else {
-            memoryGame.pickedCards[0].className = "card"
-            memoryGame.pickedCards[1].className = "card"
-          }
-          memoryGame.pickedCards = [];
-          document.getElementById("pairs-clicked").innerHTML = memoryGame.pairsClicked
-          document.getElementById("pairs-guessed").innerHTML = memoryGame.pairsGuessed
-          if (memoryGame.checkIfFinished() === true) {
-            document.querySelector('#memory-board').innerHTML = `
-              <h1>GAME OVER</h1>
-              <h2>Pairs clicked: ${memoryGame.pairsClicked}</h2>
-              <h2>Pairs guessed: ${memoryGame.pairsGuessed}</h2>
-            `
-          }
+      if (memoryGame.pickedCards.length == 2) {
+        if (memoryGame.checkIfPair(memoryGame.pickedCards[0].getAttribute("data-card-name"), memoryGame.pickedCards[1].getAttribute("data-card-name")) === true) {
+          memoryGame.pickedCards[0].className = "card turned blocked"
+          memoryGame.pickedCards[1].className = "card turned blocked"
         }
-        else if (memoryGame.pickedCards.length > 2) {
-        setTimeout( () => { if (card.className === "card turned") {card.className = "card"; memoryGame.pickedCards = [];} }, 1000)}
-      }, 1500)
+      else {
+        memoryGame.pickedCards[0].className = "card"
+        memoryGame.pickedCards[1].className = "card"
+      }
+      memoryGame.pickedCards = [];
+      document.getElementById("pairs-clicked").innerHTML = memoryGame.pairsClicked
+      document.getElementById("pairs-guessed").innerHTML = memoryGame.pairsGuessed
+      if (memoryGame.checkIfFinished() === true) {
+        document.querySelector('#memory-board').innerHTML = `
+          <h1>GAME OVER</h1>
+          <h2>Pairs clicked: ${memoryGame.pairsClicked}</h2>
+          <h2>Pairs guessed: ${memoryGame.pairsGuessed}</h2>
+        `
+      }
+    };
     });
   });
 });

@@ -51,16 +51,27 @@ window.addEventListener('load', () => {
       console.log(`Card clicked: ${card}`);
       
       memoryGame.pickedCards.push(card)
-      if (memoryGame.pickedCards.length == 2) {
+      if (memoryGame.pickedCards.length === 2) {
         if (memoryGame.checkIfPair(memoryGame.pickedCards[0].getAttribute("data-card-name"), memoryGame.pickedCards[1].getAttribute("data-card-name")) === true) {
           memoryGame.pickedCards[0].className = "card turned blocked"
           memoryGame.pickedCards[1].className = "card turned blocked"
+          memoryGame.pickedCards = [];
         }
-      else {
-        memoryGame.pickedCards[0].className = "card"
-        memoryGame.pickedCards[1].className = "card"
+        else {
+          setTimeout(() => {
+            memoryGame.pickedCards[0].className = "card"
+            memoryGame.pickedCards[1].className = "card"
+            memoryGame.pickedCards = [];
+          }, 1000);
+        }
       }
-      memoryGame.pickedCards = [];
+      else if (memoryGame.pickedCards.length > 2) {
+          memoryGame.pickedCards.forEach(element => {
+            element.className="card"
+          });
+          memoryGame.pickedCards = [];
+      }
+      
       document.getElementById("pairs-clicked").innerHTML = memoryGame.pairsClicked
       document.getElementById("pairs-guessed").innerHTML = memoryGame.pairsGuessed
       if (memoryGame.checkIfFinished() === true) {
@@ -70,7 +81,6 @@ window.addEventListener('load', () => {
           <h2>Pairs guessed: ${memoryGame.pairsGuessed}</h2>
         `
       }
-    };
     });
   });
 });
